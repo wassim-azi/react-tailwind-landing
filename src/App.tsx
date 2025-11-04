@@ -1,24 +1,8 @@
 import React from 'react';
-import Hero from './components/Hero';
-import SocialProof from './components/SocialProof';
-import Features from './components/Features';
-import HowItWorks from './components/HowItWorks';
-import Pricing from './components/Pricing';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
+import LandingPage from './pages/LandingPage';
 
 const App: React.FC = () => {
-  return (
-    <div className="min-h-screen">
-      <Hero />
-      <SocialProof />
-      <Features />
-      <HowItWorks />
-      <Pricing />
-      <FAQ />
-      <Footer />
-    </div>
-  );
+  return <LandingPage />;
 };
 
 export default App;
