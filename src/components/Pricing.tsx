@@ -1,154 +1,234 @@
-import React from 'react';
+/**
+ * Pricing Component - High-Conversion SaaS Pricing Section
+ *
+ * Features:
+ * - Monthly/Yearly toggle with 20% discount
+ * - "Most Popular" visual emphasis on Pro plan
+ * - Outcome-focused benefits
+ * - Analytics tracking on all interactions
+ */
 
-interface PricingTier {
+import React, { useState } from 'react';
+import { track } from '../utils/analytics';
+
+interface PricingPlan {
   name: string;
-  price: string;
-  period: string;
-  description: string;
-  features: string[];
-  cta: string;
-  featured: boolean;
+  monthlyPrice: number | null;
   icon: string;
+  description: string;
+  benefits: string[];
+  cta: string;
+  popular?: boolean;
 }
 
-const pricingTiers: PricingTier[] = [
+const plans: PricingPlan[] = [
   {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    description: "Perfect for individuals trying out FlowSync",
-    features: [
-      "Connect up to 3 tools",
-      "Basic sync (30 min intervals)",
-      "500 syncs per month",
-      "Community support",
-      "7-day activity history"
+    name: 'Free',
+    monthlyPrice: 0,
+    icon: 'fa-seedling',
+    description: 'For individuals exploring automation',
+    benefits: [
+      'Connect up to 3 tools',
+      'Basic sync (30-min intervals)',
+      '500 syncs/month',
+      'Community support',
+      '7-day activity history',
     ],
-    cta: "Get Started Free",
-    featured: false,
-    icon: "fa-seedling"
+    cta: 'Start Free',
   },
   {
-    name: "Pro",
-    price: "$29",
-    period: "per month",
-    description: "For professionals and small teams",
-    features: [
-      "Connect unlimited tools",
-      "Real-time sync (instant)",
-      "Unlimited syncs",
-      "Priority email support",
-      "Unlimited history & search",
-      "Advanced automation rules",
-      "Custom workflows",
-      "Team collaboration (up to 10)"
+    name: 'Pro',
+    monthlyPrice: 29,
+    icon: 'fa-rocket',
+    description: 'For professionals who value their time',
+    benefits: [
+      'Connect unlimited tools',
+      'Real-time sync (instant)',
+      'Unlimited syncs',
+      'Priority email support',
+      'Unlimited history & search',
+      'Advanced automation rules',
+      'Custom workflows',
+      'Team collaboration (up to 10)',
     ],
-    cta: "Start Free Trial",
-    featured: true,
-    icon: "fa-rocket"
+    cta: 'Start Pro — Free 14-day trial',
+    popular: true,
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    period: "contact us",
-    description: "For large teams with advanced needs",
-    features: [
-      "Everything in Pro, plus:",
-      "Dedicated account manager",
-      "SLA guarantee (99.9% uptime)",
-      "Advanced security & compliance",
-      "Custom integrations",
-      "Unlimited team members",
-      "SSO & SAML authentication",
-      "Priority 24/7 phone support"
+    name: 'Enterprise',
+    monthlyPrice: null,
+    icon: 'fa-building',
+    description: 'For large teams with advanced needs',
+    benefits: [
+      'Everything in Pro, plus:',
+      'Dedicated account manager',
+      'SLA guarantee (99.9% uptime)',
+      'Advanced security & compliance',
+      'Custom integrations',
+      'Unlimited team members',
+      'SSO & SAML authentication',
+      'Priority 24/7 phone support',
     ],
-    cta: "Contact Sales",
-    featured: false,
-    icon: "fa-building"
-  }
+    cta: 'Contact Sales',
+  },
 ];
 
 const Pricing: React.FC = () => {
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+
+  const handleToggle = (period: 'monthly' | 'yearly') => {
+    setBillingPeriod(period);
+    // (C) Analytics call: track toggle interaction
+    track('pricing_toggle_clicked', { period });
+  };
+
+  const handleCTAClick = (planName: string) => {
+    // (C) Analytics call: track CTA clicks
+    track('pricing_cta_click', { plan: planName, billing: billingPeriod });
+    console.log(`CTA clicked: ${planName} - ${billingPeriod}`);
+  };
+
+  const getPrice = (monthlyPrice: number | null): string => {
+    if (monthlyPrice === null) return 'Custom';
+    if (monthlyPrice === 0) return '$0';
+
+    // (B) A/B test location: flip monthly/yearly pricing display
+    if (billingPeriod === 'yearly') {
+      const yearlyPrice = Math.round(monthlyPrice * 12 * 0.8); // 20% discount
+      return `$${yearlyPrice}`;
+    }
+    return `$${monthlyPrice}`;
+  };
+
+  const getPeriod = (monthlyPrice: number | null): string => {
+    if (monthlyPrice === null) return 'contact us';
+    if (monthlyPrice === 0) return 'forever';
+    return billingPeriod === 'yearly' ? 'per year' : 'per month';
+  };
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Simple, Transparent Pricing
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+            Choose the plan that fits your workflow
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Start free, upgrade when you need more. No hidden fees, no surprises.
+          <p className="text-xl mb-8" style={{ color: 'var(--text-secondary)' }}>
+            FlowSync scales with your team — from solo to enterprise
           </p>
+
+          {/* Monthly/Yearly Toggle */}
+          <div className="inline-flex items-center gap-4 p-1 rounded-full" style={{ backgroundColor: 'var(--bg-surface)', border: '2px solid var(--border-default)' }}>
+            <button
+              onClick={() => handleToggle('monthly')}
+              className={`px-6 py-2 rounded-full font-medium transition-all ${
+                billingPeriod === 'monthly' ? 'shadow-md' : ''
+              }`}
+              style={{
+                backgroundColor: billingPeriod === 'monthly' ? 'var(--accent-primary)' : 'transparent',
+                color: billingPeriod === 'monthly' ? 'white' : 'var(--text-secondary)',
+              }}
+              role="switch"
+              aria-checked={billingPeriod === 'monthly'}
+              aria-label="Switch to monthly billing"
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => handleToggle('yearly')}
+              className={`px-6 py-2 rounded-full font-medium transition-all flex items-center gap-2 ${
+                billingPeriod === 'yearly' ? 'shadow-md' : ''
+              }`}
+              style={{
+                backgroundColor: billingPeriod === 'yearly' ? 'var(--accent-primary)' : 'transparent',
+                color: billingPeriod === 'yearly' ? 'white' : 'var(--text-secondary)',
+              }}
+              role="switch"
+              aria-checked={billingPeriod === 'yearly'}
+              aria-label="Switch to yearly billing"
+            >
+              Yearly
+              <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: 'var(--color-success)', color: 'white' }}>
+                Save 20%
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-6 max-w-6xl mx-auto">
-          {pricingTiers.map((tier) => (
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+          {plans.map((plan) => (
             <div
-              key={tier.name}
+              key={plan.name}
               className={`relative rounded-2xl p-8 transition-all duration-300 ${
-                tier.featured
-                  ? 'bg-gradient-to-br from-accent-500 to-primary-600 text-white shadow-2xl scale-105 border-4 border-accent-400'
-                  : 'bg-white border-2 border-gray-200 hover:border-primary-300 shadow-lg hover:shadow-xl'
+                plan.popular
+                  ? 'transform scale-105 shadow-lg border-2'
+                  : 'shadow-md hover:shadow-lg border'
               }`}
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                borderColor: plan.popular ? 'var(--accent-secondary)' : 'var(--border-default)',
+              }}
             >
-              {/* Featured Badge */}
-              {tier.featured && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-yellow-400 text-gray-900 text-sm font-bold px-4 py-1 rounded-full shadow-md">
-                    MOST POPULAR
-                  </span>
+              {/* "Most Popular" Ribbon (top-right diagonal) */}
+              {plan.popular && (
+                <div className="absolute -top-1 -right-1 overflow-hidden w-32 h-32 pointer-events-none">
+                  <div
+                    className="absolute top-0 right-0 w-40 h-8 transform rotate-45 translate-x-10 translate-y-6 text-center text-xs font-bold flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--accent-secondary)', color: 'white' }}
+                  >
+                    Most Popular
+                  </div>
                 </div>
               )}
 
               {/* Icon */}
-              <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 ${
-                tier.featured ? 'bg-white bg-opacity-20' : 'bg-gradient-to-br from-primary-50 to-purple-50'
-              }`}>
-                <i className={`fas ${tier.icon} text-2xl ${tier.featured ? 'text-white' : 'text-primary-600'}`}></i>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4" style={{ backgroundColor: 'var(--accent-primary)', opacity: 0.1 }}>
+                <i className={`fas ${plan.icon} text-3xl`} style={{ color: 'var(--accent-primary)' }}></i>
               </div>
 
-              {/* Tier Name */}
-              <h3 className={`text-2xl font-bold mb-2 ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
-                {tier.name}
+              {/* Plan Name */}
+              <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                {plan.name}
               </h3>
 
               {/* Description */}
-              <p className={`text-sm mb-6 ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-600'}`}>
-                {tier.description}
+              <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
+                {plan.description}
               </p>
 
               {/* Price */}
               <div className="mb-6">
-                <span className={`text-5xl font-bold ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
-                  {tier.price}
+                <span className="text-5xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                  {getPrice(plan.monthlyPrice)}
                 </span>
-                <span className={`text-lg ml-2 ${tier.featured ? 'text-white text-opacity-80' : 'text-gray-500'}`}>
-                  /{tier.period}
+                <span className="text-lg ml-2" style={{ color: 'var(--text-muted)' }}>
+                  /{getPeriod(plan.monthlyPrice)}
                 </span>
               </div>
 
               {/* CTA Button */}
+              {/* (A) CTA color: controlled by --cta variable (see src/theme.ts) */}
               <button
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all mb-8 ${
-                  tier.featured
-                    ? 'bg-white text-accent-600 hover:bg-gray-50 shadow-lg'
-                    : 'bg-accent-500 text-white hover:bg-accent-600'
-                }`}
+                onClick={() => handleCTAClick(plan.name)}
+                className="w-full px-6 py-3 rounded-2xl font-semibold transition-all mb-8"
+                style={{
+                  backgroundColor: plan.popular ? 'var(--cta)' : 'var(--accent-secondary)',
+                  color: 'white',
+                }}
+                aria-label={plan.cta}
               >
-                {tier.cta}
+                {plan.cta}
               </button>
 
-              {/* Features List */}
+              {/* Benefits List */}
               <ul className="space-y-3">
-                {tier.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <i className={`fas fa-check-circle mt-1 mr-3 ${
-                      tier.featured ? 'text-white' : 'text-green-500'
-                    }`}></i>
-                    <span className={`text-sm ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
-                      {feature}
+                {plan.benefits.map((benefit, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <i className="fas fa-check-circle mt-1" style={{ color: 'var(--color-success)' }}></i>
+                    <span className="text-sm" style={{ color: 'var(--text-primary)' }}>
+                      {benefit}
                     </span>
                   </li>
                 ))}
@@ -157,10 +237,10 @@ const Pricing: React.FC = () => {
           ))}
         </div>
 
-        {/* Additional Info */}
-        <div className="text-center mt-12">
-          <p className="text-gray-600">
-            All plans include 14-day free trial • Cancel anytime • Secure payments
+        {/* Trust Microcopy */}
+        <div className="text-center">
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            No credit card required • Cancel anytime • Secure billing (256-bit encryption)
           </p>
         </div>
       </div>

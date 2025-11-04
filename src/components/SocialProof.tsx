@@ -59,11 +59,11 @@ const SocialProof: React.FC = () => {
             Trusted by leading teams worldwide
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-60">
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+1" alt="Company 1" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+2" alt="Company 2" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+3" alt="Company 3" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+4" alt="Company 4" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+5" alt="Company 5" className="h-8 sm:h-10" />
+            <i className="fab fa-github text-4xl sm:text-5xl hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }} title="GitHub"></i>
+            <i className="fab fa-slack text-4xl sm:text-5xl hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }} title="Slack"></i>
+            <i className="fab fa-microsoft text-4xl sm:text-5xl hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }} title="Microsoft"></i>
+            <i className="fab fa-google text-4xl sm:text-5xl hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }} title="Google"></i>
+            <i className="fab fa-dropbox text-4xl sm:text-5xl hover:opacity-100 transition-opacity" style={{ color: 'var(--text-secondary)' }} title="Dropbox"></i>
           </div>
         </div>
 

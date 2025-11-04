@@ -1,6 +1,17 @@
 import React from 'react';
+import { track } from '../utils/analytics';
 
 const Hero: React.FC = () => {
+  const handleCTAClick = () => {
+    track('hero_cta_click', { location: 'primary' });
+    console.log('CTA clicked - navigate to signup');
+  };
+
+  const handleDemoClick = () => {
+    track('hero_demo_click');
+    console.log('Demo clicked');
+  };
+
   return (
     <section className="gradient-bg py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -15,11 +26,19 @@ const Hero: React.FC = () => {
               FlowSync automatically connects Slack, Notion, Gmail, and all your tools into one seamless workflow—no manual updates, no context switching.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="bg-accent-500 hover:bg-accent-600 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+              {/* Primary CTA - uses --cta color from theme.ts */}
+              <button
+                onClick={handleCTAClick}
+                className="text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                style={{ backgroundColor: 'var(--cta)' }}
+              >
                 Start Free Trial
                 <i className="fas fa-arrow-right ml-2"></i>
               </button>
-              <button className="bg-white hover:bg-gray-50 text-gray-900 font-semibold px-8 py-4 rounded-lg border-2 border-gray-200 transition-all">
+              <button
+                onClick={handleDemoClick}
+                className="bg-white hover:bg-gray-50 text-gray-900 font-semibold px-8 py-4 rounded-lg border-2 border-gray-200 transition-all"
+              >
                 Watch Demo
                 <i className="fas fa-play ml-2"></i>
               </button>
