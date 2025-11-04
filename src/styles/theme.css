@@ -1,0 +1,155 @@
+/**
+ * FlowSync Theme Variables
+ *
+ * These CSS variables control the entire color palette and can be edited
+ * to rebrand the landing page or run A/B tests on different color schemes.
+ *
+ * CONVERSION TIP: The --cta-* variables are your primary conversion levers.
+ * Test different high-contrast colors for CTAs (orange, red, blue, green).
+ * Ensure WCAG AA contrast ratio ≥4.5:1 against backgrounds.
+ */
+
+:root {
+  /* ========================================
+     BACKGROUND & NEUTRALS
+     ======================================== */
+  --bg-primary: #F8FAFC;        /* slate-50 - main background */
+  --bg-surface: #FFFFFF;         /* white - card backgrounds */
+  --text-primary: #0F172A;       /* slate-900 - main text */
+  --text-secondary: #475569;     /* slate-600 - secondary text */
+  --text-muted: #94A3B8;         /* slate-400 - muted text */
+  --border-default: #E2E8F0;     /* slate-200 - borders */
+  --border-hover: #CBD5E1;       /* slate-300 - hover borders */
+
+  /* ========================================
+     BRAND ACCENTS
+     ======================================== */
+  --accent-primary: #06B6D4;     /* cyan-500 - links, subtle highlights */
+  --accent-primary-hover: #0891B2; /* cyan-600 - hover state */
+  --accent-secondary: #6366F1;   /* indigo-500 - headings, gradients */
+  --accent-secondary-hover: #4F46E5; /* indigo-600 */
+
+  /* ========================================
+     PRIMARY CTA (MOST IMPORTANT FOR CONVERSION)
+     A/B Test Variations:
+     - Orange (current): #FB923C
+     - Red: #EF4444
+     - Blue: #3B82F6
+     - Green: #10B981
+     ======================================== */
+  --cta-bg: #FB923C;             /* orange-400 - PRIMARY CTA */
+  --cta-bg-hover: #F97316;       /* orange-500 - hover */
+  --cta-text: #FFFFFF;           /* white - text on CTA */
+  --cta-text-hover: #FFFFFF;     /* white - hover text */
+
+  /* Secondary CTA (outline buttons) */
+  --cta-secondary-border: #0F172A;
+  --cta-secondary-text: #0F172A;
+  --cta-secondary-hover-bg: #0F172A;
+  --cta-secondary-hover-text: #FFFFFF;
+
+  /* ========================================
+     SEMANTIC COLORS
+     ======================================== */
+  --color-success: #10B981;      /* green-500 */
+  --color-warning: #F59E0B;      /* amber-500 */
+  --color-error: #EF4444;        /* red-500 */
+  --color-info: #3B82F6;         /* blue-500 */
+
+  /* ========================================
+     SHADOWS & EFFECTS
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-cta: 0 4px 14px 0 rgb(251 146 60 / 0.39);
+
+  /* ========================================
+     SPACING & SIZING
+     ======================================== */
+  --section-padding-y: 4rem;     /* 64px on mobile */
+  --section-padding-y-lg: 6rem;  /* 96px on desktop */
+  --container-max-width: 80rem;  /* 1280px */
+  --border-radius: 0.75rem;      /* 12px */
+  --border-radius-full: 9999px;  /* pill buttons */
+}
+
+/* ========================================
+   DARK MODE (Optional - for future enhancement)
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  :root.dark-mode {
+    --bg-primary: #0F172A;
+    --bg-surface: #1E293B;
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #64748B;
+    --border-default: #334155;
+    --border-hover: #475569;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES USING THEME VARIABLES
+   ======================================== */
+
+/* Primary CTA Button */
+.btn-cta-primary {
+  background-color: var(--cta-bg);
+  color: var(--cta-text);
+  padding: 0.875rem 2rem;
+  border-radius: var(--border-radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: var(--shadow-cta);
+  transition: all 0.2s ease-in-out;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-cta-primary:hover {
+  background-color: var(--cta-bg-hover);
+  color: var(--cta-text-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px 0 rgb(251 146 60 / 0.45);
+}
+
+.btn-cta-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary CTA Button */
+.btn-cta-secondary {
+  background-color: transparent;
+  color: var(--cta-secondary-text);
+  padding: 0.875rem 2rem;
+  border-radius: var(--border-radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid var(--cta-secondary-border);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-cta-secondary:hover {
+  background-color: var(--cta-secondary-hover-bg);
+  color: var(--cta-secondary-hover-text);
+}
+
+/* Gradient backgrounds for sections */
+.gradient-hero {
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F5F3FF 100%);
+}
+
+.gradient-subtle {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+}
