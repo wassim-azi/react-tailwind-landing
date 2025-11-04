@@ -28,6 +28,28 @@ const TrustStrip: React.FC = () => {
           </div>
         </div>
 
+        {/* Testimonial */}
+        <div className="flex justify-center mb-8">
+          <div className="flex items-start gap-4 p-6 rounded-lg max-w-2xl"
+               style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', border: '1px solid var(--border-default)' }}>
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&fit=crop"
+              alt="Sarah Chen"
+              className="w-12 h-12 rounded-full border-2"
+              style={{ borderColor: 'var(--accent-primary)' }}
+              loading="lazy"
+            />
+            <div>
+              <p className="text-base italic mb-2" style={{ color: 'var(--text-primary)' }}>
+                "Cut our team's context-switching time by 60%. Life-changing."
+              </p>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                <strong>Sarah Chen</strong>, Product Lead at TechCorp
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Trust Badges */}
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 py-6 border-t border-b"
              style={{ borderColor: 'var(--border-default)' }}>
@@ -40,8 +62,8 @@ const TrustStrip: React.FC = () => {
             <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>256-bit Encryption</span>
           </div>
           <div className="flex items-center gap-2">
-            <i className="fas fa-star text-yellow-500 text-xl"></i>
-            <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>4.9/5 Rating</span>
+            <i className="fas fa-users text-blue-500 text-xl"></i>
+            <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>Trusted by teams at GitHub, Slack & more</span>
           </div>
         </div>
       </div>
