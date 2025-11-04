@@ -9,6 +9,7 @@
  */
 
 import React, { useState } from 'react';
+import { trackConversion } from '../config/abTests';
 import { track } from '../utils/analytics';
 
 interface PricingPlan {
@@ -80,11 +81,13 @@ const Pricing: React.FC = () => {
     setBillingPeriod(period);
     // (C) Analytics call: track toggle interaction
     track('pricing_toggle_clicked', { period });
+    trackConversion('pricing_toggle_clicked', undefined, undefined, period === 'yearly' ? 1 : 0);
   };
 
   const handleCTAClick = (planName: string) => {
     // (C) Analytics call: track CTA clicks
     track('pricing_cta_click', { plan: planName, billing: billingPeriod });
+    trackConversion('pricing_cta_clicked', undefined, undefined);
     console.log(`CTA clicked: ${planName} - ${billingPeriod}`);
   };
 
@@ -107,7 +110,11 @@ const Pricing: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <section
+      id="pricing"
+      className="py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">

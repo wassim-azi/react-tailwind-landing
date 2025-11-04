@@ -42,44 +42,44 @@ const features: Feature[] = [
 
 const Features: React.FC = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
             Everything You Need, Nothing You Don't
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             Stop juggling tools and losing context. FlowSync brings your entire workflow into one connected ecosystem.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+              className="bg-white rounded-lg md:rounded-xl p-6 sm:p-7 md:p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
             >
-              <div className={`inline-flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-br from-primary-50 to-purple-50 mb-5`}>
-                <i className={`fas ${feature.icon} text-2xl ${feature.color}`}></i>
+              <div className={`inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-gradient-to-br from-primary-50 to-purple-50 mb-4 sm:mb-5`}>
+                <i className={`fas ${feature.icon} text-xl sm:text-2xl ${feature.color}`}></i>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </div>
           ))}
 
           {/* CTA Card */}
-          <div className="bg-gradient-to-br from-accent-500 to-primary-600 rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 text-white flex flex-col justify-center items-center text-center">
-            <i className="fas fa-rocket text-4xl mb-4 opacity-90"></i>
-            <h3 className="text-2xl font-bold mb-3">
+          <div className="bg-gradient-to-br from-accent-500 to-primary-600 rounded-lg md:rounded-xl p-6 sm:p-7 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 text-white flex flex-col justify-center items-center text-center">
+            <i className="fas fa-rocket text-3xl sm:text-4xl mb-3 sm:mb-4 opacity-90"></i>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">
               Ready to Transform Your Workflow?
             </h3>
-            <button className="bg-white text-accent-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors mt-2">
+            <button className="bg-white text-accent-600 font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-gray-50 transition-colors mt-2 text-sm sm:text-base">
               Start Free Trial
             </button>
           </div>
