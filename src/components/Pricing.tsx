@@ -70,68 +70,68 @@ const pricingTiers: PricingTier[] = [
 
 const Pricing: React.FC = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
             Simple, Transparent Pricing
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
             Start free, upgrade when you need more. No hidden fees, no surprises.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-6 max-w-6xl mx-auto">
           {pricingTiers.map((tier) => (
             <div
               key={tier.name}
-              className={`relative rounded-2xl p-8 transition-all duration-300 ${
+              className={`relative rounded-xl md:rounded-2xl p-6 sm:p-7 md:p-8 transition-all duration-300 ${
                 tier.featured
-                  ? 'bg-gradient-to-br from-accent-500 to-primary-600 text-white shadow-2xl scale-105 border-4 border-accent-400'
+                  ? 'bg-gradient-to-br from-accent-500 to-primary-600 text-white shadow-2xl md:scale-105 border-4 border-accent-400'
                   : 'bg-white border-2 border-gray-200 hover:border-primary-300 shadow-lg hover:shadow-xl'
               }`}
             >
               {/* Featured Badge */}
               {tier.featured && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-yellow-400 text-gray-900 text-sm font-bold px-4 py-1 rounded-full shadow-md">
+                <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-yellow-400 text-gray-900 text-xs sm:text-sm font-bold px-3 sm:px-4 py-1 rounded-full shadow-md">
                     MOST POPULAR
                   </span>
                 </div>
               )}
 
               {/* Icon */}
-              <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 ${
+              <div className={`inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg mb-3 sm:mb-4 ${
                 tier.featured ? 'bg-white bg-opacity-20' : 'bg-gradient-to-br from-primary-50 to-purple-50'
               }`}>
-                <i className={`fas ${tier.icon} text-2xl ${tier.featured ? 'text-white' : 'text-primary-600'}`}></i>
+                <i className={`fas ${tier.icon} text-xl sm:text-2xl ${tier.featured ? 'text-white' : 'text-primary-600'}`}></i>
               </div>
 
               {/* Tier Name */}
-              <h3 className={`text-2xl font-bold mb-2 ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-xl sm:text-2xl font-bold mb-2 ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
                 {tier.name}
               </h3>
 
               {/* Description */}
-              <p className={`text-sm mb-6 ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-600'}`}>
+              <p className={`text-xs sm:text-sm mb-4 sm:mb-6 ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-600'}`}>
                 {tier.description}
               </p>
 
               {/* Price */}
-              <div className="mb-6">
-                <span className={`text-5xl font-bold ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
+              <div className="mb-4 sm:mb-6">
+                <span className={`text-3xl sm:text-4xl md:text-5xl font-bold ${tier.featured ? 'text-white' : 'text-gray-900'}`}>
                   {tier.price}
                 </span>
-                <span className={`text-lg ml-2 ${tier.featured ? 'text-white text-opacity-80' : 'text-gray-500'}`}>
+                <span className={`text-base sm:text-lg ml-2 ${tier.featured ? 'text-white text-opacity-80' : 'text-gray-500'}`}>
                   /{tier.period}
                 </span>
               </div>
 
               {/* CTA Button */}
               <button
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition-all mb-8 ${
+                className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold transition-all mb-6 sm:mb-8 text-sm sm:text-base ${
                   tier.featured
                     ? 'bg-white text-accent-600 hover:bg-gray-50 shadow-lg'
                     : 'bg-accent-500 text-white hover:bg-accent-600'
@@ -141,13 +141,13 @@ const Pricing: React.FC = () => {
               </button>
 
               {/* Features List */}
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {tier.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <i className={`fas fa-check-circle mt-1 mr-3 ${
+                    <i className={`fas fa-check-circle mt-0.5 sm:mt-1 mr-2 sm:mr-3 text-sm sm:text-base ${
                       tier.featured ? 'text-white' : 'text-green-500'
                     }`}></i>
-                    <span className={`text-sm ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
+                    <span className={`text-xs sm:text-sm ${tier.featured ? 'text-white text-opacity-90' : 'text-gray-700'}`}>
                       {feature}
                     </span>
                   </li>
@@ -158,8 +158,8 @@ const Pricing: React.FC = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="text-center mt-12">
-          <p className="text-gray-600">
+        <div className="text-center mt-8 sm:mt-10 md:mt-12">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 px-4">
             All plans include 14-day free trial • Cancel anytime • Secure payments
           </p>
         </div>
