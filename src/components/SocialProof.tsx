@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import techcorpLogo from '../assets/images/companies/techcorp.svg';
-import innovateLogo from '../assets/images/companies/innovate.svg';
-import cloudflowLogo from '../assets/images/companies/cloudflow.svg';
-import datasyncLogo from '../assets/images/companies/datasync.svg';
-import streamlineLogo from '../assets/images/companies/streamline.svg';
 
 interface Testimonial {
   id: number;
@@ -63,12 +58,12 @@ const SocialProof: React.FC = () => {
           <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-8">
             Trusted by leading teams worldwide
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-60">
-            <img src={techcorpLogo} alt="TechCorp" className="h-8 sm:h-10" />
-            <img src={innovateLogo} alt="Innovate" className="h-8 sm:h-10" />
-            <img src={cloudflowLogo} alt="CloudFlow" className="h-8 sm:h-10" />
-            <img src={datasyncLogo} alt="DataSync" className="h-8 sm:h-10" />
-            <img src={streamlineLogo} alt="StreamLine" className="h-8 sm:h-10" />
+          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 text-gray-600">
+            <i className="fab fa-github text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="GitHub"></i>
+            <i className="fab fa-slack text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Slack"></i>
+            <i className="fab fa-microsoft text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Microsoft"></i>
+            <i className="fab fa-google text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Google"></i>
+            <i className="fab fa-dropbox text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Dropbox"></i>
           </div>
         </div>
 
