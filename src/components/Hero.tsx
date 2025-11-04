@@ -15,6 +15,7 @@
 
 import React from 'react';
 import { getVariant, trackConversion } from '../config/abTests';
+import { track } from '../utils/analytics';
 
 const Hero: React.FC = () => {
   // A/B Test: Headline variation
@@ -23,12 +24,13 @@ const Hero: React.FC = () => {
 
   const handleCTAClick = () => {
     trackConversion('hero_cta_click', 'ctaColor');
-    // Navigate to signup or trigger modal
+    track('hero_cta_click', { location: 'primary' });
     console.log('CTA clicked - navigate to signup');
   };
 
   const handleSecondaryCTA = () => {
     trackConversion('hero_secondary_cta_click');
+    track('hero_demo_click');
     console.log('Secondary CTA clicked');
   };
 
@@ -93,7 +95,7 @@ const Hero: React.FC = () => {
 
             {/* CTA Group */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
-              {/* Primary CTA */}
+              {/* Primary CTA - uses --cta color from theme.ts */}
               <button
                 onClick={handleCTAClick}
                 className="btn-cta-primary text-lg"

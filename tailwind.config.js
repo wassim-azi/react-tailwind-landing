@@ -1,4 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+
+/**
+ * TO CHANGE CTA COLOR:
+ * Edit src/theme.ts → theme.colors.cta
+ * The color token is used via CSS variables (--cta) in src/styles/theme.css
+ */
+
 export default {
   content: [
     "./index.html",
