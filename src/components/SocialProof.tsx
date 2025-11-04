@@ -51,29 +51,29 @@ const SocialProof: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Company Logos */}
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <p className="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-6 sm:mb-8">
             Trusted by leading teams worldwide
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 text-gray-600">
-            <i className="fab fa-github text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="GitHub"></i>
-            <i className="fab fa-slack text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Slack"></i>
-            <i className="fab fa-microsoft text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Microsoft"></i>
-            <i className="fab fa-google text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Google"></i>
-            <i className="fab fa-dropbox text-5xl sm:text-6xl hover:text-gray-800 transition-colors" title="Dropbox"></i>
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 text-gray-600">
+            <i className="fab fa-github text-4xl sm:text-5xl md:text-6xl hover:text-gray-800 transition-colors" title="GitHub"></i>
+            <i className="fab fa-slack text-4xl sm:text-5xl md:text-6xl hover:text-gray-800 transition-colors" title="Slack"></i>
+            <i className="fab fa-microsoft text-4xl sm:text-5xl md:text-6xl hover:text-gray-800 transition-colors" title="Microsoft"></i>
+            <i className="fab fa-google text-4xl sm:text-5xl md:text-6xl hover:text-gray-800 transition-colors" title="Google"></i>
+            <i className="fab fa-dropbox text-4xl sm:text-5xl md:text-6xl hover:text-gray-800 transition-colors" title="Dropbox"></i>
           </div>
         </div>
 
         {/* Testimonial Slider */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-primary-50 to-purple-50 rounded-2xl p-8 sm:p-12 shadow-lg">
+          <div className="bg-gradient-to-br from-primary-50 to-purple-50 rounded-xl md:rounded-2xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg">
             <div className="text-center">
-              <i className="fas fa-quote-left text-4xl text-primary-400 mb-6"></i>
+              <i className="fas fa-quote-left text-3xl sm:text-4xl text-primary-400 mb-4 sm:mb-6"></i>
 
-              <div className="relative h-48 sm:h-40">
+              <div className="relative h-56 sm:h-48 md:h-40">
                 {testimonials.map((testimonial, index) => (
                   <div
                     key={testimonial.id}
@@ -81,36 +81,36 @@ const SocialProof: React.FC = () => {
                       index === currentIndex ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
-                    <p className="text-xl sm:text-2xl text-gray-800 mb-6 italic">
+                    <p className="text-lg sm:text-xl md:text-2xl text-gray-800 mb-4 sm:mb-6 italic px-2 sm:px-4">
                       "{testimonial.content}"
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="flex flex-col items-center mt-8">
+              <div className="flex flex-col items-center mt-6 sm:mt-8">
                 <img
                   src={testimonials[currentIndex].avatar}
                   alt={testimonials[currentIndex].name}
-                  className="w-16 h-16 rounded-full mb-4 border-4 border-white shadow-md"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mb-3 sm:mb-4 border-4 border-white shadow-md"
                 />
-                <h4 className="font-semibold text-lg text-gray-900">
+                <h4 className="font-semibold text-base sm:text-lg text-gray-900">
                   {testimonials[currentIndex].name}
                 </h4>
-                <p className="text-gray-600">
+                <p className="text-sm sm:text-base text-gray-600">
                   {testimonials[currentIndex].role} at {testimonials[currentIndex].company}
                 </p>
               </div>
 
               {/* Slider Dots */}
-              <div className="flex justify-center gap-2 mt-8">
+              <div className="flex justify-center gap-2 mt-6 sm:mt-8">
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
+                    className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all ${
                       index === currentIndex
-                        ? 'bg-primary-600 w-8'
+                        ? 'bg-primary-600 w-6 sm:w-8'
                         : 'bg-gray-300 hover:bg-gray-400'
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
