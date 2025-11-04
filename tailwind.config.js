@@ -2,8 +2,8 @@
 
 /**
  * TO CHANGE CTA COLOR:
- * Edit src/theme.ts → theme.colors.cta
- * The color token is used via CSS variables (--cta) in src/styles/theme.css
+ * Edit the 'cta' color below to update the primary CTA site-wide
+ * Also update src/theme.ts → theme.colors.cta for CSS variable consistency
  */
 
 export default {
@@ -14,6 +14,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Change CTA color here to update site-wide
+        cta: '#FB923C',        // Primary CTA button color (orange)
+        accent1: '#06B6D4',    // Cyan - links, highlights
+        accent2: '#6366F1',    // Indigo - headings, gradients
+        bg: '#F8FAFC',         // Main background
+        text: '#0F172A',       // Primary text
+
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',

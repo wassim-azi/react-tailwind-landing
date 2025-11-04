@@ -84,6 +84,13 @@ const Pricing: React.FC = () => {
     trackConversion('pricing_toggle_clicked', undefined, undefined, period === 'yearly' ? 1 : 0);
   };
 
+  const handleToggleKeyDown = (event: React.KeyboardEvent, period: 'monthly' | 'yearly') => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      handleToggle(period);
+    }
+  };
+
   const handleCTAClick = (planName: string) => {
     // (C) Analytics call: track CTA clicks
     track('pricing_cta_click', { plan: planName, billing: billingPeriod });
@@ -114,11 +121,12 @@ const Pricing: React.FC = () => {
       id="pricing"
       className="py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
       style={{ backgroundColor: 'var(--bg-primary)' }}
+      aria-labelledby="pricing-heading"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+          <h2 id="pricing-heading" className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
             Choose the plan that fits your workflow
           </h2>
           <p className="text-xl mb-8" style={{ color: 'var(--text-secondary)' }}>
@@ -129,6 +137,7 @@ const Pricing: React.FC = () => {
           <div className="inline-flex items-center gap-4 p-1 rounded-full" style={{ backgroundColor: 'var(--bg-surface)', border: '2px solid var(--border-default)' }}>
             <button
               onClick={() => handleToggle('monthly')}
+              onKeyDown={(e) => handleToggleKeyDown(e, 'monthly')}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
                 billingPeriod === 'monthly' ? 'shadow-md' : ''
               }`}
@@ -144,6 +153,7 @@ const Pricing: React.FC = () => {
             </button>
             <button
               onClick={() => handleToggle('yearly')}
+              onKeyDown={(e) => handleToggleKeyDown(e, 'yearly')}
               className={`px-6 py-2 rounded-full font-medium transition-all flex items-center gap-2 ${
                 billingPeriod === 'yearly' ? 'shadow-md' : ''
               }`}

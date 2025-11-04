@@ -14,21 +14,18 @@
  */
 
 import React from 'react';
-import { getVariant, trackConversion } from '../config/abTests';
+import { trackConversion } from '../config/abTests';
 import { track } from '../utils/analytics';
 
 const Hero: React.FC = () => {
-  // A/B Test: Headline variation
-  const headlineText = getVariant<string>('heroHeadline');
-  const showNoCreditCard = getVariant<boolean>('noCreditCardCopy');
-
   const handleCTAClick = () => {
     trackConversion('hero_cta_click', 'ctaColor');
     track('hero_cta_click', { location: 'primary' });
     console.log('CTA clicked - navigate to signup');
   };
 
-  const handleSecondaryCTA = () => {
+  const handleSecondaryCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     trackConversion('hero_secondary_cta_click');
     track('hero_demo_click');
     console.log('Secondary CTA clicked');
@@ -84,78 +81,48 @@ const Hero: React.FC = () => {
             {/* Headline - Benefit-focused, readable in ≤3 seconds */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
                 style={{ color: 'var(--text-primary)' }}>
-              {headlineText}
+              FlowSync keeps your team in sync — across apps and devices.
             </h1>
 
             {/* Sub-headline - Clear value proposition */}
             <p className="text-lg sm:text-xl lg:text-2xl mb-8 leading-relaxed"
                style={{ color: 'var(--text-secondary)' }}>
-              Automatically sync tasks, messages, and files across Slack, Notion, Gmail, and 50+ tools. Save 5+ hours per week on context switching.
+              One platform. All your workflows. Zero interruptions.
             </p>
 
             {/* CTA Group */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
-              {/* Primary CTA - uses --cta color from theme.ts */}
+            <div className="flex flex-col gap-3 justify-center lg:justify-start mb-4">
+              {/* Primary CTA - most visually dominant */}
               <button
                 onClick={handleCTAClick}
-                className="btn-cta-primary text-lg"
-                aria-label="Start free trial - sync in minutes"
+                className="px-8 py-4 rounded-2xl font-bold text-white text-lg shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                style={{ backgroundColor: 'var(--cta)' }}
+                aria-label="Start free trial"
               >
-                Start Free Trial — Sync in Minutes
+                Start Free Trial
                 <i className="fas fa-arrow-right ml-2"></i>
               </button>
 
-              {/* Secondary CTA */}
-              <button
+              {/* Secondary CTA - smaller and less prominent */}
+              <a
+                href="#demo"
                 onClick={handleSecondaryCTA}
-                className="btn-cta-secondary text-lg"
-                aria-label="Watch 30 second demo"
+                className="text-sm font-normal hover:underline"
+                style={{ color: 'var(--text-secondary)' }}
               >
-                <i className="fas fa-play mr-2"></i>
-                Watch 30s Demo
-              </button>
+                Watch Demo
+              </a>
             </div>
 
             {/* Micro-copy: Risk reducers */}
-            {showNoCreditCard && (
-              <p className="text-sm flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2"
-                 style={{ color: 'var(--text-muted)' }}>
-                <span className="flex items-center gap-2">
-                  <i className="fas fa-check-circle" style={{ color: 'var(--color-success)' }}></i>
-                  No credit card required
-                </span>
-                <span className="flex items-center gap-2">
-                  <i className="fas fa-check-circle" style={{ color: 'var(--color-success)' }}></i>
-                  Cancel anytime
-                </span>
-                <span className="flex items-center gap-2">
-                  <i className="fas fa-check-circle" style={{ color: 'var(--color-success)' }}></i>
-                  14-day free trial
-                </span>
-              </p>
-            )}
-
-            {/* Inline Trust Indicator (compact testimonial) */}
-            <div className="mt-8 p-4 rounded-lg inline-block"
-                 style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)', border: '1px solid var(--border-default)' }}>
-              <div className="flex items-start gap-3">
-                <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=48&h=48&fit=crop"
-                  alt="Sarah Chen"
-                  className="w-12 h-12 rounded-full border-2"
-                  style={{ borderColor: 'var(--accent-primary)' }}
-                  loading="lazy"
-                />
-                <div className="text-left">
-                  <p className="text-sm italic mb-1" style={{ color: 'var(--text-primary)' }}>
-                    "Cut our team's context-switching time by 60%. Life-changing."
-                  </p>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    <strong>Sarah Chen</strong>, Product Lead at TechCorp
-                  </p>
-                </div>
-              </div>
-            </div>
+            <p className="text-xs flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1"
+               style={{ color: 'var(--text-muted)' }}>
+              <span>No credit card required</span>
+              <span>•</span>
+              <span>Cancel anytime</span>
+              <span>•</span>
+              <span>Secure & encrypted billing</span>
+            </p>
           </div>
 
           {/* Right Column: Product Visual */}
