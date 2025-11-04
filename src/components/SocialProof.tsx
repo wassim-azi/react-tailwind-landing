@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import techcorpLogo from '../assets/images/companies/techcorp.svg';
+import innovateLogo from '../assets/images/companies/innovate.svg';
+import cloudflowLogo from '../assets/images/companies/cloudflow.svg';
+import datasyncLogo from '../assets/images/companies/datasync.svg';
+import streamlineLogo from '../assets/images/companies/streamline.svg';
 
 interface Testimonial {
   id: number;
@@ -59,11 +64,11 @@ const SocialProof: React.FC = () => {
             Trusted by leading teams worldwide
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-60">
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+1" alt="Company 1" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+2" alt="Company 2" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+3" alt="Company 3" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+4" alt="Company 4" className="h-8 sm:h-10" />
-            <img src="https://via.placeholder.com/120x40/4A5568/FFFFFF?text=Company+5" alt="Company 5" className="h-8 sm:h-10" />
+            <img src={techcorpLogo} alt="TechCorp" className="h-8 sm:h-10" />
+            <img src={innovateLogo} alt="Innovate" className="h-8 sm:h-10" />
+            <img src={cloudflowLogo} alt="CloudFlow" className="h-8 sm:h-10" />
+            <img src={datasyncLogo} alt="DataSync" className="h-8 sm:h-10" />
+            <img src={streamlineLogo} alt="StreamLine" className="h-8 sm:h-10" />
           </div>
         </div>
 
